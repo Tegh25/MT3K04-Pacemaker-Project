@@ -1,10 +1,12 @@
 import './App.css';
+import SignUpForm from './components/SignUpForm';
 
 function App() {
   return (
-    <div className="App">
+    <div id="App">
       <h1>Welcome to your PaceMaker</h1>
       <button >Sign in</button>
+      <SignUpForm/>
     </div>
   );
 }
