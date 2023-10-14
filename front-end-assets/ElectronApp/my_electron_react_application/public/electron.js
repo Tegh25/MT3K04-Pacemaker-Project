@@ -16,6 +16,7 @@ function createWindow() {
   // and load the index.html of the app.
   console.log(__dirname);
   mainWindow.loadFile(path.join(__dirname, "../build/index.html"));
+  mainWindow.openDevTools();
 
   //let sign = new BrowserWindow({parent:mainWindow});
   //mainWindow.loadFile('sign')

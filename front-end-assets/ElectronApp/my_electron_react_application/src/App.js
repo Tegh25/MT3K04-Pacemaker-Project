@@ -1,13 +1,11 @@
 import './App.css';
+import React from 'react';
 import SignUpForm from './components/SignUpForm';
+import WelcomePage from './components/WelcomeForm';
 
 function App() {
   return (
-    <div id="App">
-      <h1>Welcome to your PaceMaker</h1>
-      <button >Sign in</button>
-      <SignUpForm/>
-    </div>
+    <WelcomePage/>
   );
 }
 
