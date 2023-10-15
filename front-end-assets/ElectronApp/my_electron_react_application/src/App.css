@@ -137,3 +137,26 @@ p{
   z-index: -100;
   scale: 0.8;
 }
+
+input[type=number]{
+  width: 30%;
+  height: 20px;
+  border: 1px solid #880808;
+  border-radius: 2px;
+  font-weight: 200;
+  color: black;
+  display: inline-block;
+  float: right;
+}
+
+label{
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: var(--text-dark-grey);
+  justify-self: left;
+  display: inline-block;
+  float: left;
+  clear: right;
+  width: 200px;
+  text-align: left;
+}

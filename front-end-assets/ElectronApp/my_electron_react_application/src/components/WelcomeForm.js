@@ -60,7 +60,10 @@ class WelcomeForm extends Component {
         return(
             <>
                 <DisplayLogo/>
-                <DashboardPage/>
+                <DashboardPage
+                displayHomePage={this.home}
+                displayLoginPage={this.logIn}
+                />
             </>
         )
     }
