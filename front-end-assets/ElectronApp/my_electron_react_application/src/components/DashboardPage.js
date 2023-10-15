@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { ipcRenderer } from 'electron'
 import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 
+
 function requestUsername() {
   ipcRenderer.send('request-username');
   ipcRenderer.on('provide-username', (event, data) => {
@@ -11,7 +12,7 @@ function requestUsername() {
 }
 
 
-function DashboardPage({ displayHomePage, displayLoginPage }) {
+function DashboardPage({ displayHomePage }) {
 
   // requestUsername();
 
@@ -49,7 +50,7 @@ function DashboardPage({ displayHomePage, displayLoginPage }) {
       <button className='decorative-button' >Update PaceMaker</button>
       <button 
       className='small-button' 
-      onClick={ () => { displayLoginPage()}}>
+      onClick={ () => { displayHomePage()}}>
         Log Out</button>
     </div>
   )
