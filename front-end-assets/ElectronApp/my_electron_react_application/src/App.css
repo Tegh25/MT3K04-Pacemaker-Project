@@ -3,6 +3,7 @@
   --logo-blue: #B7E0DC;
   --logo-orange: #F9CFA5;
   --text-light-grey: #909090;
+  --text-dark-grey: #575757;
   background-color: var(--bg-grey);
   display: flex;
   justify-content: center;
@@ -12,29 +13,33 @@
 h1{
   font-family: 'Inter', sans-serif;
   font-weight: 700;
-  color: black;
+  color: var(--text-dark-grey);
 }
 
 p{
   font-family: 'Inter', sans-serif;
   font-weight: 400;
-  color: black;
+  color: var(--text-dark-grey);
 }
-
+/* 
 .App {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
-.form-div{
+.form-div{  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: white;
   border-radius: 30px;
   /* width: 25vw;
   max-width: 20em;
   height: 30vh;
   max-height: 30em; */
-  aspect-ratio: 25/30;
+  /* aspect-ratio: 25/30; */
   padding: 4em 4em;
   display: flex;
   flex-direction: column;
@@ -52,22 +57,21 @@ p{
 
 .form-inputs-div{
   display: flex;
+  max-width: 15em;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
 }
 
 .form-header-text{
   margin-top: 0;
-}
-
-#heart-image{
-  width: 3em;
+  text-align: center;
 }
 
 .form-text-input{
   border-width: 0px 0px 1px 0px;
+  display: block;
+  width: 100%;
   border-color: var(--text-light-grey);
   font-family: 'Inter', sans-serif;
   font-weight: 400;
@@ -85,7 +89,51 @@ p{
   font-weight: 900;
   font-size: 20px;
   width: 100%;
+  max-width: 13em;
   padding: 0.75em;
   margin-top: 2em;
   text-align: center;
+  cursor: pointer;
+}
+
+.negative-decorative-button{
+  background: linear-gradient(white, white) padding-box,
+  linear-gradient(60deg, var(--logo-blue), var(--logo-orange)) border-box;
+  border-radius: 30px;
+  border: 2px solid transparent;
+  color: var(--text-light-grey);
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  width: 100%;
+  max-width: 13em;
+  padding: 0.75em;
+  margin-top: 2em;
+  text-align: center;
+  cursor: pointer;
+}
+
+.small-button{
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-light-grey);
+  text-decoration: underline;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  margin: 0.5em;
+}
+
+#heart-image{
+  width: 3em;
+}
+
+#logo-image-div{
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  z-index: -100;
+  scale: 0.8;
 }

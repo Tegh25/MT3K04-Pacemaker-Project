@@ -1,11 +1,10 @@
 import './App.css';
 import React from 'react';
-import SignUpForm from './components/SignUpForm';
-import WelcomePage from './components/WelcomeForm';
+import WelcomeForm from './components/WelcomeForm';
 
 function App() {
   return (
-    <WelcomePage/>
+    <WelcomeForm/>
   );
 }
 

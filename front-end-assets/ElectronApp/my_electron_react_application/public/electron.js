@@ -1,16 +1,23 @@
 const electron = require("electron");
 const path = require("path");
+const settings = require("electron-settings");
 
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const ipcMain = electron.ipcMain;
 
 let mainWindow;
+
+settings.configure({
+  fileName: 'user.json',
+  prettify: true
+});
 
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
     webPreferences: { nodeIntegration: true, contextIsolation: false },
   });
   // and load the index.html of the app.
@@ -21,6 +28,24 @@ function createWindow() {
   //let sign = new BrowserWindow({parent:mainWindow});
   //mainWindow.loadFile('sign')
 }
+
+ipcMain.on('signup-data', (data) => {
+  const{username, password} = data;
+  settings.set(username, password);
+  console.log(settings.file());
+});
+
+ipcMain.on('login-data', async(event, data) => {
+  const{username, password} = data;
+  let isValidLogin = false;
+  if (await settings.get(username) === password) {
+    isValidLogin = true;
+  } else {
+    isValidLogin = false;
+  }
+  event.reply('login-data', { isValidLogin });
+});
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
