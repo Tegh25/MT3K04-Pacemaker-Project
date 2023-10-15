@@ -9,7 +9,6 @@ function LogInForm({displayDashboardPage, displayHomePage}) {
     const [password, setPassword] = useState('');
 
     function CheckLogin (username, password) {
-        
         ipcRenderer.send('login-data', {username, password});
         ipcRenderer.on('login-data', (event, data) => {
             const { isValidLogin } = data;
@@ -20,8 +19,7 @@ function LogInForm({displayDashboardPage, displayHomePage}) {
                 }, 1500);
             }
             else{
-                console.log("here")
-                    setLoginText('Ivalid credentials');
+                setLoginText('Ivalid credentials');
                 setTimeout(() => {
                     setLoginText('Login')
                 }, 1500)
