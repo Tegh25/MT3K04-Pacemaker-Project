@@ -14,7 +14,7 @@ function SignUpForm({displayDashboardPage, displayHomePage}) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
         
-    function WriteSignIn (username, password) {
+    function StoreSignIn (username, password) {
         if(username && password){
             ipcRenderer.send('signup-data', {username, password, signUpValidationEnum});
             ipcRenderer.on('signup-data', (event, data) => {
@@ -64,7 +64,7 @@ function SignUpForm({displayDashboardPage, displayHomePage}) {
                 />
                 <button 
                 className='decorative-button' 
-                onClick={() => {WriteSignIn(username, password)}}>
+                onClick={() => {StoreSignIn(username, password)}}>
                     {signupText}
                 </button>
             </div>

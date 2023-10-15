@@ -139,14 +139,18 @@ p{
 }
 
 input[type=number]{
-  width: 30%;
-  height: 20px;
-  border: 1px solid #880808;
-  border-radius: 2px;
+  width: 20%;
+  height: 1.5em;
+  /* border: 1px solid #880808; */
+  border: 1px solid var(--logo-blue);
+  border-radius: 5px;
   font-weight: 200;
-  color: black;
+  font-size: 14px;
+  color: var(--text-dark-grey);
   display: inline-block;
   float: right;
+  margin: 0.75em 0;
+  text-align: center;
 }
 
 label{
@@ -159,4 +163,5 @@ label{
   clear: right;
   width: 200px;
   text-align: left;
+  margin: 0.75em 0;
 }
