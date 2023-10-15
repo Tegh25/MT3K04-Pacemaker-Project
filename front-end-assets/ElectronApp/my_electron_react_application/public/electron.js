@@ -50,7 +50,8 @@ ipcMain.on('signup-data', async(event, data) => {
 ipcMain.on('login-data', async(event, data) => {
   const{username, password} = data;
   let isValidLogin = false;
-  if (await settings.get(username) === password) {
+  const userData = await settings.get(username)
+  if (userData.password == password) {
     isValidLogin = true;
   } else {
     isValidLogin = false;
