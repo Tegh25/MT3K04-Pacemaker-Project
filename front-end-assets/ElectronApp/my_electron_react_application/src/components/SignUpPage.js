@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { ipcRenderer } from 'electron';
 import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 
-function SignUpForm({displayDashboardPage, displayHomePage}) {
+function SignUpForm({displayPulseModePage, displayHomePage}) {
 
     const signUpValidationEnum = {
         VALID: 1,
@@ -22,7 +22,7 @@ function SignUpForm({displayDashboardPage, displayHomePage}) {
                 if(isValidSignUp == signUpValidationEnum.VALID) {
                     setSignupText('Thanks for signing up... Redirecting');
                     setTimeout(() => {
-                        displayDashboardPage();
+                        displayPulseModePage();
                     }, 1500);
                 }
                 else if(isValidSignUp == signUpValidationEnum.USERNAMETAKEN){

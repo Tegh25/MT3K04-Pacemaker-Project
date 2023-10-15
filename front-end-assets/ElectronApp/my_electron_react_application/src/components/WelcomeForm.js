@@ -4,12 +4,14 @@ import SignUpPage from './SignUpPage';
 import LoginPage from './LoginPage';
 import DashboardPage from './DashboardPage';
 import DisplayLogo from './DisplayLogo';
+import PulseModePage from './PulseModePage';
 
 const PageEnum = {
     HOME: 1,
     SIGNUP: 2,
     LOGIN: 3,
-    DASHBOARD: 4
+    PULSEMODE: 4,
+    DASHBOARD: 5
 }
 
 class WelcomeForm extends Component {
@@ -37,7 +39,7 @@ class WelcomeForm extends Component {
             <>
                 <DisplayLogo/>
                 <SignUpPage
-                displayDashboardPage={this.dashboard}
+                displayPulseModePage={this.pulseMode}
                 displayHomePage={this.home}
                 />
             </>
@@ -49,8 +51,20 @@ class WelcomeForm extends Component {
             <>
                 <DisplayLogo/>
                 <LoginPage
-                displayDashboardPage={this.dashboard}
+                displayPulseModePage={this.pulseMode}
                 displayHomePage={this.home}
+                />
+            </>
+        )
+    }
+
+    displayPulseModePage = () => {
+        return (
+            <>
+                <DisplayLogo/>
+                <PulseModePage
+                displayLoginPage={this.logIn}
+                displayDashboardPage={this.dashboard}
                 />
             </>
         )
@@ -61,7 +75,6 @@ class WelcomeForm extends Component {
             <>
                 <DisplayLogo/>
                 <DashboardPage
-                displayHomePage={this.home}
                 displayLoginPage={this.logIn}
                 />
             </>
@@ -87,6 +100,12 @@ class WelcomeForm extends Component {
         })
     }
 
+    pulseMode = () => {
+        this.setState({
+            displayDiv: PageEnum.PULSEMODE
+        })
+    }
+
     dashboard = () => {
         this.setState({
             displayDiv: PageEnum.DASHBOARD
@@ -102,6 +121,9 @@ class WelcomeForm extends Component {
         }
         else if(this.state.displayDiv==PageEnum.LOGIN){
             return this.displayLoginPage()
+        }
+        else if(this.state.displayDiv==PageEnum.PULSEMODE){
+            return this.displayPulseModePage()
         }
         else if(this.state.displayDiv==PageEnum.DASHBOARD){
             return this.displayDashboardPage()

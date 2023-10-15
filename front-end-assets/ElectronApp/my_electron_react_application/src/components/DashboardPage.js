@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 
-function DashboardPage({ displayHomePage, displayLoginPage }) {
+function DashboardPage({ displayLoginPage }) {
 
   const [LRL, setLRL] = useState('');
   const [URL, setURL] = useState('');
