@@ -6,17 +6,17 @@ import DashboardPage from './DashboardPage';
 import DisplayLogo from './DisplayLogo';
 
 const PageEnum = {
-    home: 1,
-    signup: 2,
-    login: 3,
-    dashboard: 4
+    HOME: 1,
+    SIGNUP: 2,
+    LOGIN: 3,
+    DASHBOARD: 4
 }
 
 class WelcomeForm extends Component {
     constructor(props){
         super(props)
         this.state = {
-            displayDiv: PageEnum.home
+            displayDiv: PageEnum.HOME
         }
     }
 
@@ -68,39 +68,39 @@ class WelcomeForm extends Component {
     
     signUp = () => {
         this.setState({
-            displayDiv: PageEnum.signup
+            displayDiv: PageEnum.SIGNUP
         })
     }
 
     logIn = () => {
         this.setState({
-            displayDiv: PageEnum.login
+            displayDiv: PageEnum.LOGIN
         })
     }
 
     home = () => {
         this.setState({
-            displayDiv: PageEnum.home
+            displayDiv: PageEnum.HOME
         })
     }
 
     dashboard = () => {
         this.setState({
-            displayDiv: PageEnum.dashboard
+            displayDiv: PageEnum.DASHBOARD
         })
     }
 
     render = () => {
-        if(this.state.displayDiv==PageEnum.home){
+        if(this.state.displayDiv==PageEnum.HOME){
             return this.displayHomePage()
         }
-        else if(this.state.displayDiv==PageEnum.signup){
+        else if(this.state.displayDiv==PageEnum.SIGNUP){
             return this.displaySignupPage()
         }
-        else if(this.state.displayDiv==PageEnum.login){
+        else if(this.state.displayDiv==PageEnum.LOGIN){
             return this.displayLoginPage()
         }
-        else if(this.state.displayDiv==PageEnum.dashboard){
+        else if(this.state.displayDiv==PageEnum.DASHBOARD){
             return this.displayDashboardPage()
         }
     }

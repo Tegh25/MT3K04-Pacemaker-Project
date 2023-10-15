@@ -29,10 +29,22 @@ function createWindow() {
   //mainWindow.loadFile('sign')
 }
 
-ipcMain.on('signup-data', (data) => {
-  const{username, password} = data;
-  settings.set(username, password);
-  console.log(settings.file());
+ipcMain.on('signup-data', async(event, data) => {
+  // signUpValidationEnum -> VALID: 1, USERNAMETAKEN: 2, TOOMANYUSERNAMES: 3
+  const{username, password, signUpValidationEnum} = data;
+  if(Object.keys(await settings.get()).length < 10) {
+    if(await settings.get(username)) {
+      isValidLogin = signUpValidationEnum.USERNAMETAKEN
+    }
+    else{
+      isValidSignUp = signUpValidationEnum.VALID
+      settings.set(username,{password: password});
+    }
+  }
+  else{
+    isValidSignUp = signUpValidationEnum.TOOMANYUSERNAMES
+  }
+  event.reply('signup-data', { isValidSignUp })
 });
 
 ipcMain.on('login-data', async(event, data) => {

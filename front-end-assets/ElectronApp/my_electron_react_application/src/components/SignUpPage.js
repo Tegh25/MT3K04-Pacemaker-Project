@@ -3,6 +3,12 @@ import { ipcRenderer } from 'electron';
 import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 
 function SignUpForm({displayDashboardPage, displayHomePage}) {
+
+    const signUpValidationEnum = {
+        VALID: 1,
+        USERNAMETAKEN: 2,
+        TOOMANYUSERNAMES: 3
+    }
     
     const [signupText, setSignupText] = useState('Sign Up');
     const [username, setUsername] = useState('');
@@ -10,12 +16,28 @@ function SignUpForm({displayDashboardPage, displayHomePage}) {
         
     function WriteSignIn (username, password) {
         if(username && password){
-            ipcRenderer.send('signup-data', {username, password});
-            // console.log(settings.file())
-            setSignupText('Thanks for signing up... Redirecting');
-            setTimeout(() => {
-                displayDashboardPage();
-            }, 1500);
+            ipcRenderer.send('signup-data', {username, password, signUpValidationEnum});
+            ipcRenderer.on('signup-data', (event, data) => {
+                const { isValidSignUp } = data;
+                if(isValidSignUp == signUpValidationEnum.VALID) {
+                    setSignupText('Thanks for signing up... Redirecting');
+                    setTimeout(() => {
+                        displayDashboardPage();
+                    }, 1500);
+                }
+                else if(isValidSignUp == signUpValidationEnum.USERNAMETAKEN){
+                    setSignupText('Username taken... Try again');
+                    setTimeout(() => {
+                        setSignupText('Sign up')
+                    }, 1500);
+                }
+                else if(isValidSignUp == signUpValidationEnum.TOOMANYUSERNAMES){
+                    setSignupText('Too many users... Redirecting');
+                    setTimeout(() => {
+                        displayHomePage();
+                    }, 1500);
+                }
+            });
         }
     }
 
