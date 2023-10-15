@@ -3,6 +3,7 @@ import HomePage from './HomePage';
 import SignUpPage from './SignUpPage';
 import LoginPage from './LoginPage';
 import DashboardPage from './DashboardPage';
+import DisplayLogo from './DisplayLogo';
 
 const PageEnum = {
     home: 1,
@@ -21,32 +22,46 @@ class WelcomeForm extends Component {
 
     displayHomePage = () => {
         return(
-            <HomePage 
-            displaySignUpPage={this.signUp} 
-            displayLoginPage={this.logIn}
-            />
+            <>
+                <DisplayLogo/>
+                <HomePage 
+                displaySignUpPage={this.signUp} 
+                displayLoginPage={this.logIn}
+                />
+            </>
         )
     }
 
     displaySignupPage = () => {
         return(
-            <SignUpPage
-            displayDashboardPage={this.dashboard}
-            />
+            <>
+                <DisplayLogo/>
+                <SignUpPage
+                displayDashboardPage={this.dashboard}
+                displayHomePage={this.home}
+                />
+            </>
         )
     }
 
     displayLoginPage = () => {
         return(
-            <LoginPage
-            displayDashboardPage={this.dashboard}
-            />
+            <>
+                <DisplayLogo/>
+                <LoginPage
+                displayDashboardPage={this.dashboard}
+                displayHomePage={this.home}
+                />
+            </>
         )
     }
 
     displayDashboardPage = () => {
         return(
-            <DashboardPage/>
+            <>
+                <DisplayLogo/>
+                <DashboardPage/>
+            </>
         )
     }
 

@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
-import { IpcRenderer, ipcRenderer } from 'electron';
+import { ipcRenderer } from 'electron';
 import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 
-
-
-function SignUpForm({displayDashboardPage}) {
+function SignUpForm({displayDashboardPage, displayHomePage}) {
     
     const [signupText, setSignupText] = useState('Sign Up!');
     const [username, setUsername] = useState('');
@@ -42,10 +40,15 @@ function SignUpForm({displayDashboardPage}) {
                 />
                 <button 
                 className='decorative-button' 
-                onClick={()=>{WriteSignIn(username, password)}}>
+                onClick={() => {WriteSignIn(username, password)}}>
                     {signupText}
                 </button>
             </div>
+            <button 
+            className='small-button'
+            onClick={() => {displayHomePage()}}>
+                Home
+            </button>
     </div>
   )
 }
