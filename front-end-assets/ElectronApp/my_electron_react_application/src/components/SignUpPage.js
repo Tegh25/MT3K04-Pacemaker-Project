@@ -1,14 +1,19 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import { IpcRenderer, ipcRenderer } from 'electron';
 import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 
 
 
 function SignUpForm({displayDashboardPage}) {
     
-    const [signupText, setSignupText] = useState("Sign Up!")
+    const [signupText, setSignupText] = useState('Sign Up!');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
         
     function WriteSignIn (username, password) {
-        setSignupText("Thanks for signing up... Redirecting");
+        ipcRenderer.send('signup-data', {username, password});
+        // console.log(settings.file())
+        setSignupText('Thanks for signing up... Redirecting');
         setTimeout(() => {
             displayDashboardPage();
         }, 1500);
@@ -21,9 +26,25 @@ function SignUpForm({displayDashboardPage}) {
             <SvgHeart id="heart-image"/>
         </div>
             <div id='form-inputs-div'>
-                <input type="text" id="username" name="username" placeholder='Username' className='form-text-input'/>
-                <input type="text" id="password" name="password" placeholder='Password' className='form-text-input'/>
-                <button className='decorative-button' onClick={()=>{WriteSignIn()}}>{signupText}</button>
+                <input 
+                    type="text" 
+                    id="username" 
+                    placeholder='Username' 
+                    className='form-text-input'
+                    onChange={event => setUsername(event.target.value)}
+                />
+                <input 
+                    type="text" 
+                    id="password" 
+                    placeholder='Password' 
+                    className='form-text-input'
+                    onChange={event => setPassword(event.target.value)}
+                />
+                <button 
+                className='decorative-button' 
+                onClick={()=>{WriteSignIn(username, password)}}>
+                    {signupText}
+                </button>
             </div>
     </div>
   )
