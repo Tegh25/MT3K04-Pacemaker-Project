@@ -4,17 +4,19 @@ import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 
 function SignUpForm({displayDashboardPage, displayHomePage}) {
     
-    const [signupText, setSignupText] = useState('Sign Up!');
+    const [signupText, setSignupText] = useState('Sign Up');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
         
     function WriteSignIn (username, password) {
-        ipcRenderer.send('signup-data', {username, password});
-        // console.log(settings.file())
-        setSignupText('Thanks for signing up... Redirecting');
-        setTimeout(() => {
-            displayDashboardPage();
-        }, 1500);
+        if(username && password){
+            ipcRenderer.send('signup-data', {username, password});
+            // console.log(settings.file())
+            setSignupText('Thanks for signing up... Redirecting');
+            setTimeout(() => {
+                displayDashboardPage();
+            }, 1500);
+        }
     }
 
   return (
