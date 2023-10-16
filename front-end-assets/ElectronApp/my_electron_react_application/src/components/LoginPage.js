@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 import { ipcRenderer } from 'electron';
 
-function LogInForm({displayDashboardPage, displayHomePage}) {
+function LogInForm({displayPulseModePage, displayHomePage}) {
 
     const [loginText, setLoginText] = useState('Login');
     const [username, setUsername] = useState('');
@@ -15,7 +15,7 @@ function LogInForm({displayDashboardPage, displayHomePage}) {
             if (isValidLogin){
                 setLoginText('Thanks for logging in... Redirecting');
                 setTimeout(() => {
-                    displayDashboardPage();
+                    displayPulseModePage();
                 }, 1500);
             }
             else{

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { ipcRenderer } from 'electron';
 import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 
-function SignUpForm({displayDashboardPage, displayHomePage}) {
+function SignUpForm({displayPulseModePage, displayHomePage}) {
 
     const signUpValidationEnum = {
         VALID: 1,
@@ -14,7 +14,7 @@ function SignUpForm({displayDashboardPage, displayHomePage}) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
         
-    function WriteSignIn (username, password) {
+    function StoreSignIn (username, password) {
         if(username && password){
             ipcRenderer.send('signup-data', {username, password, signUpValidationEnum});
             ipcRenderer.on('signup-data', (event, data) => {
@@ -22,7 +22,7 @@ function SignUpForm({displayDashboardPage, displayHomePage}) {
                 if(isValidSignUp == signUpValidationEnum.VALID) {
                     setSignupText('Thanks for signing up... Redirecting');
                     setTimeout(() => {
-                        displayDashboardPage();
+                        displayPulseModePage();
                     }, 1500);
                 }
                 else if(isValidSignUp == signUpValidationEnum.USERNAMETAKEN){
@@ -64,7 +64,7 @@ function SignUpForm({displayDashboardPage, displayHomePage}) {
                 />
                 <button 
                 className='decorative-button' 
-                onClick={() => {WriteSignIn(username, password)}}>
+                onClick={() => {StoreSignIn(username, password)}}>
                     {signupText}
                 </button>
             </div>
