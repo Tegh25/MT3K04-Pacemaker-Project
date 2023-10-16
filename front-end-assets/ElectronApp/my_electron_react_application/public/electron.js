@@ -20,6 +20,7 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, "../build/index.html"));
   mainWindow.openDevTools();
   
+  
   //let sign = new BrowserWindow({parent:mainWindow});
   //mainWindow.loadFile('sign')
 }
@@ -57,7 +58,7 @@ ipcMain.on('signup-data', async (event, data) => {
     } else {
       // Valid sign-up, set the response status and store the user data
       isValidSignUp = signUpValidationEnum.VALID;
-      settings.set(username, { password });
+      settings.set(username, {password: password });
     }
   } else {
     // Too many usernames, set the response status accordingly
@@ -77,13 +78,13 @@ ipcMain.on('signup-data', async (event, data) => {
  * @param {string} data.password - The password provided for login.
  * @returns {void} Replies with the login status.
  */
-ipcMain.on('login-data', (event, data) => {
+ipcMain.on('login-data', async (event, data) => {
   const { username, password } = data;
   let isValidLogin = false;
-  const userData = settings.getSync(username);
+  const userData = await settings.get(username);
 
   // Check if the provided password matches the stored password
-  if (userData.password === password) {
+  if (userData.password == password) {
     isValidLogin = true;
   }
 
@@ -91,7 +92,11 @@ ipcMain.on('login-data', (event, data) => {
   event.reply('login-data', { isValidLogin });
 
     // Provides the dashboard page with the username
-  event.reply('provide-username', { username });
+  ipcMain.on('request-username', (event2) => {
+    console.log("here")
+    console.log(username)
+    event2.reply('provide-username', { username });
+  });
 });
 
 
