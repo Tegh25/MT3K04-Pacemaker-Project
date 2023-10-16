@@ -6,6 +6,27 @@ import DashboardPage from './DashboardPage';
 import DisplayLogo from './DisplayLogo';
 import PulseModePage from './PulseModePage';
 
+// Description: React component representing the main application logic for navigating between different pages.
+
+// State Variables:
+//   - displayDiv: Variable to track the currently displayed page using the PageEnum constants.
+
+// Methods:
+//   - displayHomePage: Method to render the home page with the option to sign up or log in.
+//   - displaySignupPage: Method to render the sign-up page with the option to navigate to pulse mode or home.
+//   - displayLoginPage: Method to render the login page with the option to navigate to pulse mode or home.
+//   - displayPulseModePage: Method to render the pulse mode selection page with options to log out or go to the dashboard.
+//   - displayDashboardPage: Method to render the dashboard page with the option to log out.
+
+//   - signUp: Method to set the displayDiv state variable to show the sign-up page.
+//   - logIn: Method to set the displayDiv state variable to show the login page.
+//   - home: Method to set the displayDiv state variable to show the home page.
+//   - pulseMode: Method to set the displayDiv state variable to show the pulse mode selection page.
+//   - dashboard: Method to set the displayDiv state variable to show the dashboard page.
+
+//   - render: Method to dynamically render different pages based on the displayDiv state variable.
+
+
 const PageEnum = {
     HOME: 1,
     SIGNUP: 2,

@@ -4,6 +4,33 @@ import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 
 function SignUpForm({displayPulseModePage, displayHomePage}) {
 
+//     Description: Functional component representing the sign-up form of a web application.
+
+// Props:
+//   - displayPulseModePage: Function passed as a prop to navigate to the pulse mode page upon successful sign-up.
+//   - displayHomePage: Function passed as a prop to navigate back to the home page.
+
+// State Variables:
+//   - signUpValidationEnum: Enum object defining validation states for sign-up.
+//   - signupText: State variable to dynamically change the sign-up button text based on sign-up status.
+//   - username: State variable to store the input value for the username during sign-up.
+//   - password: State variable to store the input value for the password during sign-up.
+
+// Functionality:
+//   - Allows users to input a username and password for sign-up.
+//   - Sends a request to the main process to validate the sign-up credentials using IPC.
+//   - Displays different messages on the sign-up button based on sign-up status:
+//     - "Sign Up": Initial state before attempting sign-up.
+//     - "Thanks for signing up... Redirecting": After successful sign-up, before redirecting to pulse mode page.
+//     - "Username taken... Try again": If the chosen username is already in use, resets to "Sign Up" after a brief delay.
+//     - "Too many users... Redirecting": If the system has too many users, redirects to the home page after a brief delay.
+
+// UI Elements and Logic:
+//   - Displays a form with input fields for username and password.
+//   - Dynamically changes the sign-up button text based on sign-up status.
+//   - Provides a "Sign Up" button to trigger the sign-up attempt.
+//   - Provides a "Home" button to navigate back to the home page.
+
     const signUpValidationEnum = {
         VALID: 1,
         USERNAMETAKEN: 2,
