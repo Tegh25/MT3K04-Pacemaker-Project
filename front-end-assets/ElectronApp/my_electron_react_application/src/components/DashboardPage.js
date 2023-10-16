@@ -1,7 +1,14 @@
-import React, { useState } from 'react'
+import React, { Component, useState } from 'react'
 import { ipcRenderer } from 'electron'
 import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 
+class EgramData extends Component{
+  constructor(props){
+    //constructor code goes here
+  }
+
+  //class methods and variables go here
+}
 
 function requestUsername() {
   // Description: Initiates a request for a username using inter-process communication (IPC).
@@ -42,8 +49,6 @@ function DashboardPage({ displayLoginPage}) {
   // requestUsername();
 
   //console.log("i swaer to god");
-
-  let egramData = [] // for egram collection
 
 
   const [LRL, setLRL] = useState('');
