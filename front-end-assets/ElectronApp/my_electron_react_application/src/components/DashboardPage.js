@@ -12,11 +12,11 @@ function requestUsername() {
 }
 
 
-function DashboardPage({ displayHomePage }) {
+function DashboardPage({ displayLoginPage}) {
 
   // requestUsername();
 
-  console.log("i swaer to god");
+  //console.log("i swaer to god");
 
 
   const [LRL, setLRL] = useState('');
@@ -50,7 +50,7 @@ function DashboardPage({ displayHomePage }) {
       <button className='decorative-button' >Update PaceMaker</button>
       <button 
       className='small-button' 
-      onClick={ () => { displayHomePage()}}>
+      onClick={ () => { displayLoginPage()}}>
         Log Out</button>
     </div>
   )

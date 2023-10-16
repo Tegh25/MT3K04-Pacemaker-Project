@@ -1,9 +1,27 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { ReactComponent as SvgHeart } from "../assets/heart.svg";
 
 
-function PulseModePage({ displayLogInPage, displayDashboardPage }) {
-    
+function PulseModePage({ displayLoginPage, displayDashboardPage}) {
+
+    let mode = "";
+
+    function modeAOO(){
+        mode = "AOO";
+        displayDashboardPage()
+    }
+    function modeVOO(){
+        mode = "VOO";
+        displayDashboardPage()
+    }
+    function modeAAI(){
+        mode = "AAI";
+        displayDashboardPage()
+    }
+    function modeVVI(){
+        mode = "VVI";
+        displayDashboardPage()
+    }
 
     return (
         <div className='form-div'>
@@ -12,16 +30,12 @@ function PulseModePage({ displayLogInPage, displayDashboardPage }) {
                 <SvgHeart id="heart-image" />
             </div>
             <div id='form-inputs-div'>
-                <button className='decorative-button' >AOO</button>
+                <button className='decorative-button' onClick={()=>modeAOO()}>AOO</button>
                 <button className='decorative-button' >VOO</button>
                 <button className='decorative-button' >AAI</button>
                 <button className='decorative-button' >VVI</button>
             </div>
-            <button
-                className='small-button'
-                onClick={() => { displayLogInPage() }}>
-                Log Out
-            </button>
+            <button className='small-button' onClick={() => {displayLoginPage()}}>Log out</button>
         </div>
     )
 }
