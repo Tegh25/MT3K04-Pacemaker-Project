@@ -50,9 +50,9 @@ function PulseModePage({ displayLoginPage, displayDashboardPage}) {
             </div>
             <div id='form-inputs-div'>
                 <button className='decorative-button' onClick={()=>modeAOO()}>AOO</button>
-                <button className='decorative-button' >VOO</button>
-                <button className='decorative-button' >AAI</button>
-                <button className='decorative-button' >VVI</button>
+                <button className='decorative-button' onClick={()=>modeAAI()}>VOO</button>
+                <button className='decorative-button' onClick={()=>modeVOO()}>AAI</button>
+                <button className='decorative-button' onClick={()=>modeVVI()}>VVI</button>
             </div>
             <button className='small-button' onClick={() => {displayLoginPage()}}>Log out</button>
         </div>
