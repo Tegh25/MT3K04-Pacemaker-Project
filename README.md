@@ -9,9 +9,8 @@ which might not be needed to run this application but should ensure that the app
 
 Step 2: Download craco which stands for "Create React App Configuration Override". To download this follow the instructions on "https://www.npmjs.com/package/@craco/craco".
 
-Step 3: Once all the above are downloaded peform a git pull commond from this repositery to get all files on your local computer. 
+Step 3: Once all the above are downloaded peform a git pull command from this repositery to get all files on your local computer. 
 
-Step 4:Make your way to the "my-electron-react-application" folder and perfrom the "npm run build" command followed by the "npm run start" command. This should open a desktop window on your device 
-displaying the DCM. 
+Step 4: Make your way to the "my-electron-react-application" folder and perfrom the "npm run build" command followed by the "npm run start" command. This should open a desktop window on your device displaying the DCM. 
 
 NOTE: If any issues are encountered during this process YOU SHOULD UTILIZE online resources to solve them. Issues such as not being able to download all the corresponding software needed to run the DCM.
