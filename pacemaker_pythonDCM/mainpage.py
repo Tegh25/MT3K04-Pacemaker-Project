@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import messagebox
 from ttkbootstrap import *
 import ttkbootstrap as tb
-import ttkbootstrap.dialogs.dialogs as tbdialogs
 import pickle
 from funclib import *
 import copy
