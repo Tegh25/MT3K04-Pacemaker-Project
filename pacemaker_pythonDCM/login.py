@@ -80,9 +80,9 @@ class login:
         for widget in window.winfo_children():
             widget.destroy()
         self.root.title("Register")
-        title = tk.Label(window, text="Register", font="* 48", pady=0)
+        title = tk.Label(window, text="Register", font="Helvetica 48", pady=0)
         title.grid(row=0, column=1, columnspan=2, sticky="n")
-        title_ = tk.Label(window, text=" ", font="* 16", pady=0)
+        title_ = tk.Label(window, text=" ", font="Helvetica 16", pady=0)
         title_.grid(row=1, column=1, columnspan=2, sticky="n")
         username_label = Label(window, text="Username : ")
         username_label.grid(row=2, column=1, padx=10, pady=10, sticky="e")
@@ -111,9 +111,9 @@ class login:
         for widget in window.winfo_children():
             widget.destroy()
         self.root.title("Login")
-        title = tk.Label(window, text="Login", font="* 48", pady=0)
+        title = tk.Label(window, text="Login", font="Helvetica 48", pady=0)
         title.grid(row=0, column=1, columnspan=2, sticky="n")
-        title_ = tk.Label(window, text=" ", font="* 16", pady=0)
+        title_ = tk.Label(window, text=" ", font="Helvetica 16", pady=0)
         title_.grid(row=1, column=1, columnspan=2, sticky="n")
         username_label = tk.Label(window, text="Username : ")
         username_label.grid(row=2, column=1, padx=10, pady=10, sticky="e")

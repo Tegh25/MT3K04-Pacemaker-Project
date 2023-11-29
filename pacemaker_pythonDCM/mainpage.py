@@ -91,7 +91,7 @@ class mainpage:
             chd.root.title(title)
             chd.root.minsize(int(320*zoomfactor), int(140*zoomfactor))
             chd.root.maxsize(int(320*zoomfactor), int(140*zoomfactor))
-            prompt_label = Label(chd.root, text=prompt, font="* 20")
+            prompt_label = Label(chd.root, text=prompt, font="Helvetica 20")
             chd.str_entry = Entry(chd.root)
             btns_frame = Frame(chd.root)
             yes_btn = Button(btns_frame, text=btn1_text, command=lambda : chd.yes())
@@ -201,7 +201,7 @@ class mainpage:
                                          command=lambda : self.show_egram(self))
             self.show_egram_btn.pack(side=RIGHT, padx=20)
         if stat == "Settings":
-            setting_label = Label(toolbar, text=self.lang["Settings"], font="* 20")
+            setting_label = Label(toolbar, text=self.lang["Settings"], font="Helvetica 20")
             setting_label.pack(side=LEFT, padx=20)
             sftw_stings_btn = Button(toolbar, text=self.lang["Back"], bootstyle="success",
                                  command=lambda : self.pacemaker_configure_frame(self))
@@ -291,9 +291,9 @@ class mainpage:
             # print(para)
             options = [self.lang[_] for _ in para.options()]
             default = self.lang[para.default()]
-            title_box = Labelframe(self.pacing_paras_fram.interior, text=title)
+            title_box = Labelframe(self.pacing_paras_fram.interior, text=title, width=int(20*zoomfactor))
             title_box.grid(row=row, column=col, padx=5, pady=5)
-            temp_spinbox = tb.Spinbox(title_box, values=options, state='readonly')
+            temp_spinbox = tb.Spinbox(title_box, values=options, state='readonly', width=int(20*zoomfactor))
             temp_spinbox.set(default)
             temp_spinbox.bind("<<Increment>>", lambda _: temp_spinbox.selection_clear)
             temp_spinbox.bind("<<Decrement>>", lambda _: temp_spinbox.selection_clear)
@@ -361,11 +361,11 @@ class mainpage:
                  {"self": self, "temp_preset_button": temp_preset_button, preset_name: preset_name})
             temp_preset_del = Button(temp_preset_frame, text="X",
                                     #  command=lambda : self.del_preset(self, preset_name={preset_name}),
-                                     bootstyle="dark")
+                                     bootstyle=("dark", TOOLBUTTON))
             exec(f"temp_preset_del.config(command=lambda : self.del_preset(self, preset_name={preset_name}))",
                  {"self": self, "temp_preset_del": temp_preset_del, preset_name: preset_name})
-            temp_preset_button.pack(side=LEFT, fill=X, expand=True, padx=5, pady=10)
-            temp_preset_del.pack(side=RIGHT, padx=5, pady=10)
+            temp_preset_button.pack(side=LEFT, fill=BOTH, expand=True, padx=5, pady=10)
+            temp_preset_del.pack(side=RIGHT, fill=Y, padx=5, pady=10)
             temp_preset_frame.pack(fill=X, padx=5)
 
     def load_preset(self, preset_name, if_ask=True):
