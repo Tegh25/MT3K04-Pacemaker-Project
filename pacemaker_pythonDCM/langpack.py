@@ -1,9 +1,18 @@
 class ADict(dict):
-    def __getitem__(self, __key):
+    def __getitem__(self, __key: str):
         try:
             float(__key)
             return __key
         except:
+            if "rev" in __key:
+                __key = __key[3:]
+                try:
+                    float(__key)
+                    return __key
+                except:
+                    for key, val in super().items():
+                        if __key == val:
+                                return key
             return super().__getitem__(__key)
 
 EN = ADict({

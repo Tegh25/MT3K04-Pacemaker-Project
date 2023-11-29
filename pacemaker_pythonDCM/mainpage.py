@@ -161,13 +161,12 @@ class mainpage:
         self.stng_interact_f = Frame(self.root)
         self.egram_frame = Frame(self.root, height=100)
         self.pacemaker_configure_frame(self)
+        print(self.presets)
         self.root.mainloop()
         print("mainloop done")
         if self.pacing_mode != "":
             self.presets["_temp"] = [self.pacing_mode]
-            for frame in self.pacing_paras_fram.interior.winfo_children():
-                for spinbox in frame.winfo_children():
-                    self.presets["_temp"].append(spinbox.get())
+            self.presets["_temp"] += self.get_curr_paras(self)
         self.sync_self_pref(self)
         try:
             self.t.stop()
@@ -284,19 +283,6 @@ class mainpage:
             case "VVIR":
                 paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, Hysteresis, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
         
-        def _validate(user_input: str | None, range=(0, 999)):                
-            if user_input == "":
-                return True
-            try:
-                x = float(user_input)
-                if x > range[0] and x < range[1]:
-                    return True
-                else:
-                    return False
-            except ValueError:
-                return False
-
-
         i = 1
         for index, para in enumerate(paras):
             col = index % 2 + 1
@@ -311,10 +297,8 @@ class mainpage:
             temp_spinbox.set(default)
             temp_spinbox.bind("<<Increment>>", lambda _: temp_spinbox.selection_clear)
             temp_spinbox.bind("<<Decrement>>", lambda _: temp_spinbox.selection_clear)
-            # temp_spinbox.configure(validate="key",
-                                #    validatecommand=(self.root.register(lambda _ : _validate(_, lims[index])), "%P"))
             if load_preset != "":
-            #     temp_spinbox.set(self.presets[load_preset][i])
+                temp_spinbox.set(self.lang[self.presets[load_preset][i]])
                 i += 1
             temp_spinbox.pack(fill=X)
 
@@ -324,14 +308,18 @@ class mainpage:
         first_box = self.pacing_paras_fram.interior.winfo_children()[0].winfo_children()[0]
         first_box.focus_set()
 
+    def get_curr_paras(self):
+        paras = []
+        for ttlbox in self.pacing_paras_fram.interior.winfo_children():
+            temp_spinbox = ttlbox.winfo_children()[0]
+            temp_para = temp_spinbox.get()
+            para_internal_name = self.lang["rev"+temp_para]
+            paras.append(para_internal_name)
+        return paras
 
     def add_preset(self):
-        paras = []
-        count = 0
-        for frame in self.pacing_paras_fram.interior.winfo_children():
-            count += 1
-            for spinbox in frame.winfo_children():
-                paras.append(spinbox.get())
+        paras = self.get_curr_paras(self)
+        count = len(paras)
         if count == 0:
             messagebox.showwarning(self.lang["NoModeSel"], self.lang["NoModMsg"])
             return
@@ -350,22 +338,6 @@ class mainpage:
         self.update_preset_frame(self)
         print(self.presets)
 
-    def update_preset_frame(self):
-        for widget in self.preset_frame.interior.winfo_children():
-            widget.destroy()
-        for preset_name in self.presets:
-            temp_preset_frame = Frame(self.preset_frame.interior)
-            temp_preset_button = Button(temp_preset_frame, text=preset_name,
-                                        command=lambda : self.load_preset(self, preset_name=preset_name),
-                                        bootstyle="info")
-            temp_preset_del = Button(temp_preset_frame, text="X",
-                                     command=lambda : self.del_preset(self, preset_name=preset_name),
-                                     bootstyle="dark")
-            temp_preset_button.pack(side=LEFT, fill=X, expand=True, padx=5, pady=10)
-            temp_preset_del.pack(side=RIGHT, padx=5, pady=10)
-            temp_preset_frame.pack(fill=X, padx=5)
-
-
     def del_preset(self, preset_name):
         if_del = messagebox.askokcancel(self.lang["DelCfrmTtl"], self.lang["DelCfrmTxt"],
                                         icon=messagebox.WARNING)
@@ -375,6 +347,26 @@ class mainpage:
             self.sync_self_pref(self)
         else:
             return
+
+    def update_preset_frame(self):
+        for widget in self.preset_frame.interior.winfo_children():
+            widget.destroy()
+        for preset_name in self.presets:
+            print(preset_name)
+            temp_preset_frame = Frame(self.preset_frame.interior)
+            temp_preset_button = Button(temp_preset_frame, text=preset_name,
+                                        # command=lambda : self.load_preset(self, preset_name=preset_name),
+                                        bootstyle="info")
+            exec(f"temp_preset_button.config(command=lambda : self.load_preset(self, preset_name={preset_name}))",
+                 {"self": self, "temp_preset_button": temp_preset_button, preset_name: preset_name})
+            temp_preset_del = Button(temp_preset_frame, text="X",
+                                    #  command=lambda : self.del_preset(self, preset_name={preset_name}),
+                                     bootstyle="dark")
+            exec(f"temp_preset_del.config(command=lambda : self.del_preset(self, preset_name={preset_name}))",
+                 {"self": self, "temp_preset_del": temp_preset_del, preset_name: preset_name})
+            temp_preset_button.pack(side=LEFT, fill=X, expand=True, padx=5, pady=10)
+            temp_preset_del.pack(side=RIGHT, padx=5, pady=10)
+            temp_preset_frame.pack(fill=X, padx=5)
 
     def load_preset(self, preset_name, if_ask=True):
         if if_ask:
@@ -425,9 +417,7 @@ class mainpage:
         
         if self.pacing_mode != "" and not from_language:
             self.presets["_temp"] = [self.pacing_mode]
-            for frame in self.pacing_paras_fram.interior.winfo_children():
-                for spinbox in frame.winfo_children():
-                    self.presets["_temp"].append(spinbox.get())
+            self.presets["_temp"] += self.get_curr_paras(self)
 
         self.toolbar_frame(self, "Settings")
         self.main_interact_f.pack_forget()
@@ -470,7 +460,7 @@ class mainpage:
         self.setting_frame(self, from_language="True")
 
 def main():
-    root, logged, userid, loginname = login.login(relogin=False, debug=False)
+    root, logged, userid, loginname = login.login(relogin=False, debug=True)
     while 1:
         print(logged)
         if not logged or userid == -1:
@@ -478,7 +468,7 @@ def main():
         quit_code = mainpage(userid, loginname, root=root)
         if quit_code == 0:
             return
-        root, logged, userid, loginname = login.login(relogin=True, debug=False)
+        root, logged, userid, loginname = login.login(relogin=True, debug=True)
 
 if __name__ == "__main__":
     main()
