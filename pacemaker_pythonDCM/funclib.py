@@ -43,6 +43,7 @@ def center(win):
     win.deiconify()
 
 import serial.tools.list_ports
+import sendSerial
 def serial_ports():
     return serial.tools.list_ports.comports()
 
