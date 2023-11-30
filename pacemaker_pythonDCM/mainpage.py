@@ -405,7 +405,8 @@ class mainpage:
         if self.showing_egram is False:
             self.egram_frame.pack(side=BOTTOM, fill="both", expand=True, padx=5)
             Separator(self.egram_frame).pack(fill=X, padx=20, pady=20)
-            self.t = LoadSerialEgram_debug()
+            # self.t = LoadSerialEgram_debug()
+            self.t = LoadSerialEgram(serial=self.serial_port.split()[0])
             self.t.start()
             self.draw_egram = DrawEgram(master=self.egram_frame, t=self.t, lang=self.lang)
             self.show_egram_btn.configure(text=self.lang["HideEgram"])

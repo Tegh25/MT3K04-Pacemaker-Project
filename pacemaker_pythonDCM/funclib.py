@@ -131,18 +131,38 @@ class VerticalScrolledFrame(ttk.Frame):
 
 import threading
 import time
+import struct
 class LoadSerialEgram(threading.Thread):
-    def run(self, *args, **kwargs):
-        while True:
+    def run(self):
+        port = self.serial_name
+        i = 0
+        uC = serial.Serial(port, baudrate=115200)
+        st = struct.Struct('<dd')
+        serial_data = uC.read()
+        while serial_data:
             if self.stopped():
+                print("Egram stopped")
+                uC.close()
                 return
-            # Read data from serial, add data to self.egram_data: list
-            time.sleep(0.01)
+            a_data, v_data = st.unpack(serial_data) 
+            self.egram_data_x.append(i)
+            self.egram_data_y1.append(a_data)
+            self.egram_data_y2.append(v_data)
+            if len(self.egram_data_x) >= 500:
+                self.egram_data_x.pop(0)
+            if len(self.egram_data_y1) >= 500:
+                self.egram_data_y1.pop(0)
+            if len(self.egram_data_y2) >= 500:
+                self.egram_data_y2.pop(0)
+            i += 1
 
-    def __init__(self, serial, *args, **kwargs):
+    def __init__(self, serial=None, *args, **kwargs):
         self.serial_name = serial
         # Send a command to board to start sending egram data
-        super(LoadSerialEgram, self).__init__(*args, **kwargs)
+        self.egram_data_x = []
+        self.egram_data_y1 = []
+        self.egram_data_y2 = []
+        super(LoadSerialEgram_debug, self).__init__(*args, **kwargs)
         self._stop_event = threading.Event()
 
     def stop(self):
@@ -231,10 +251,10 @@ class DrawEgram():
         self.drawing_frame = tb.Frame(master=self.master, height=100, padding=0)
         self.control_frame.pack(side='top')
         self.drawing_frame.pack(side='bottom', fill="both", expand=True)
-        self.btn1 = tb.Button(self.control_frame, text=lang["Vent"],
+        self.btn1 = tb.Button(self.control_frame, text=lang["Atr"],
                           command=lambda: self.show_hide_graph(1),
                           bootstyle="danger")
-        self.btn2 = tb.Button(self.control_frame, text=lang["Atr"],
+        self.btn2 = tb.Button(self.control_frame, text=lang["Vent"],
                           command=lambda: self.show_hide_graph(2),
                           bootstyle="info")
         self.btn1.pack(side="left", padx=5)
