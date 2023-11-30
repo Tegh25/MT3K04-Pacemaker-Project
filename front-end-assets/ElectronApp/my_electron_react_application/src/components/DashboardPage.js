@@ -71,7 +71,7 @@ function DashboardPage({ displayLoginPage}) {
         <SvgHeart id="heart-image" />
       </div>
       <div className='parameter-entry-div'>
-        <label>Lower Rate Limit: </label><input type='number' id='LRL' onChange={event => setLRL(event.target.value)}></input><br></br>
+        <label>Lower Rate Limit: </label><input type='number' id='LRL' min={80} max={100} onChange={event => setLRL(event.target.value)}></input><br></br>
         <label>Upper Rate Limit: </label><input type='number' id='URL' onChange={event => setURL(event.target.value)}></input><br></br>
         <label>Atrial Amplitude: </label><input type='number' id='AA' onChange={event => setAA(event.target.value)}></input><br></br>
         <label>Ventricular Amplitude: </label><input type='number' id='VA' onChange={event => setVA(event.target.value)}></input><br></br>

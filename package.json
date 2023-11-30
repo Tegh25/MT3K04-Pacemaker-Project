@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "electron": "^27.0.4"
+  }
+}

@@ -31,3 +31,4 @@ codegen/
 
 # Cloud based storage dotfile
 .MATLABDriveTag
+node_modules

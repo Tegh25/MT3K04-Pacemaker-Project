@@ -1,0 +1,18 @@
+VVI.o: \
+ C:/Users/teghv/Documents/School/Tron-Society-3/MECHTRON-3K04/MT3K04-Pacemaker-Project/VVI_ert_rtw/VVI.c \
+ C:/Users/teghv/Documents/School/Tron-Society-3/MECHTRON-3K04/MT3K04-Pacemaker-Project/VVI_ert_rtw/VVI.h \
+ C:/Users/teghv/Documents/School/Tron-Society-3/MECHTRON-3K04/MT3K04-Pacemaker-Project/VVI_ert_rtw/rtwtypes.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/freedomk64f/include/MW_digitalIO.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h \
+ C:/Users/teghv/Documents/School/Tron-Society-3/MECHTRON-3K04/MT3K04-Pacemaker-Project/VVI_ert_rtw/rtwtypes.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/freedomk64f/include/MW_PWM.h \
+ C:/Users/teghv/Documents/School/Tron-Society-3/MECHTRON-3K04/MT3K04-Pacemaker-Project/VVI_ert_rtw/VVI_types.h \
+ C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h
+C:/Users/teghv/Documents/School/Tron-Society-3/MECHTRON-3K04/MT3K04-Pacemaker-Project/VVI_ert_rtw/VVI.h:
+C:/Users/teghv/Documents/School/Tron-Society-3/MECHTRON-3K04/MT3K04-Pacemaker-Project/VVI_ert_rtw/rtwtypes.h:
+C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/freedomk64f/include/MW_digitalIO.h:
+C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h:
+C:/Users/teghv/Documents/School/Tron-Society-3/MECHTRON-3K04/MT3K04-Pacemaker-Project/VVI_ert_rtw/rtwtypes.h:
+C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/freedomk64f/include/MW_PWM.h:
+C:/Users/teghv/Documents/School/Tron-Society-3/MECHTRON-3K04/MT3K04-Pacemaker-Project/VVI_ert_rtw/VVI_types.h:
+C:/ProgramData/MATLAB/SupportPackages/R2023b/toolbox/target/supportpackages/freedomk64f/include/MW_SVD.h:
