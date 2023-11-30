@@ -68,23 +68,23 @@ def sendSerial(port, paras_data_list):
 
     mode = mode_map[mode]
     data_map = {
-        "LowRtLim" : -1,
-        "UppRtLim" : -1,
-        "MaxSensRt": -1,
-        "AAmp" : -1.,
-        "VAmp" : -1.,
-        "APulseWid" : -1.,
-        "VPulseWid" : -1.,
-        "ASensi" : -1.,
-        "VSensi" : -1.,
-        "VRefrctPrd" : -1,
-        "ARefrctPrd" : -1,
-        "PVARP" : -1,
-        "RateSmooth" : -1,
-        "ActivThold" : -1,
-        "ReactTime" : -1,
-        "RespFactor" : -1,
-        "RecovTime" : -1,
+        "LowRtLim" : 1,
+        "UppRtLim" : 1,
+        "MaxSensRt": 1,
+        "AAmp" : 1.,
+        "VAmp" : 1.,
+        "APulseWid" : 1.,
+        "VPulseWid" : 1.,
+        "ASensi" : 1.,
+        "VSensi" : 1.,
+        "VRefrctPrd" : 1,
+        "ARefrctPrd" : 1,
+        "PVARP" : 1,
+        "RateSmooth" : 1,
+        "ActivThold" : 1,
+        "ReactTime" : 1,
+        "RespFactor" : 1,
+        "RecovTime" : 1,
         "veri" : 0
         }
     print([*data_map.values()])
@@ -98,11 +98,11 @@ def sendSerial(port, paras_data_list):
 
     print(serial_com)
     print(len(serial_com))
-    uC = serial.Serial(port, baudrate=115200)
-    uC.write(serial_com)
+    # uC = serial.Serial(port, baudrate=115200)
+    # uC.write(serial_com)
     # unpacked = st.unpack(serial_com)
     # print(unpacked)
-    uC.close()
+    # uC.close()
     return serial_com
 
 if __name__ == "__main__":
