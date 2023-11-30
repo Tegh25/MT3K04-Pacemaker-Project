@@ -25,7 +25,7 @@ def convert(para, data):
 def sendSerial(port, paras_data_list):
     # Function_Call = 0 BY DEFAULT
 
-    st = struct.Struct('<iiiffffffiiiiiiii')
+    st = struct.Struct('<IIIIddddddIIIIIIIII')
 
     mode = paras_data_list[0]
 
@@ -52,37 +52,41 @@ def sendSerial(port, paras_data_list):
             paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth,
                         VSensitivity, VRefractPrid, RateSmooth]
         case "VOOR":
-            paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth,
+            paras = [LowRateLim, UppRateLim, MaxSensRt, VAmplitude, VPulseWidth,
                         ActivThold, ReactTime, RespFactor, RecovTime]
         case "AOOR":
-            paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth,
+            paras = [LowRateLim, UppRateLim, MaxSensRt, AAmplitude, APulseWidth,
                         ActivThold, ReactTime, RespFactor, RecovTime]
         case "AAIR":
-            paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth,
+            paras = [LowRateLim, UppRateLim, MaxSensRt, AAmplitude, APulseWidth,
                         ASensitivity, ARefractPrid, PVARP, RateSmooth,
                         ActivThold, ReactTime, RespFactor, RecovTime]
         case "VVIR":
-            paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth,
+            paras = [LowRateLim, UppRateLim, MaxSensRt, VAmplitude, VPulseWidth,
                         VSensitivity, VRefractPrid, RateSmooth, ActivThold,
                         ReactTime, RespFactor, RecovTime]
 
     mode = mode_map[mode]
-    data_map = {"LowRtLim" : -1,
-    "UppRtLim" : -1,
-    "VAmp" : -1.,
-    "AAmp" : -1.,
-    "VPulseWid" : -1.,
-    "APulseWid" : -1.,
-    "ASensi" : -1.,
-    "VSensi" : -1.,
-    "ARefrctPrd" : -1,
-    "VRefrctPrd" : -1,
-    "PVARP" : -1,
-    "RateSmooth" : -1,
-    "ActivThold" : -1,
-    "ReactTime" : -1,
-    "RespFactor" : -1,
-    "RecovTime" : -1}
+    data_map = {
+        "LowRtLim" : -1,
+        "UppRtLim" : -1,
+        "MaxSensRt": -1,
+        "AAmp" : -1.,
+        "VAmp" : -1.,
+        "APulseWid" : -1.,
+        "VPulseWid" : -1.,
+        "ASensi" : -1.,
+        "VSensi" : -1.,
+        "VRefrctPrd" : -1,
+        "ARefrctPrd" : -1,
+        "PVARP" : -1,
+        "RateSmooth" : -1,
+        "ActivThold" : -1,
+        "ReactTime" : -1,
+        "RespFactor" : -1,
+        "RecovTime" : -1,
+        "veri" : 0
+        }
     print([*data_map.values()])
     print(mode)
     for para_name, para_data in zip(paras, paras_data_list[1:]):
@@ -103,8 +107,8 @@ def sendSerial(port, paras_data_list):
 
 if __name__ == "__main__":
     # LowRateLim, UppRateLim, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime
-    paras = ['AAIR', '54', '165', '7.0', '0.05', '0.25', '330', '180', '_OFF', '_V-High', '10', '5', '16']
+    paras = ['VOOR', '60', '120', '120', '3.5', '0.4', '_Med', '30', '8', '5']
     serial_com = sendSerial("", paras)
-    st = struct.Struct('<iiiffffffiiiiiiii')
+    st = struct.Struct('<IIIIddddddIIIIIIIII')
     unpacked = st.unpack(serial_com)
     print(unpacked)

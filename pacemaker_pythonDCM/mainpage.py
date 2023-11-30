@@ -20,7 +20,7 @@ else:
     zoomfactor = 1
 
 class mainpage:
-    lang = langpack.CN
+    lang = langpack.EN
     lang_var_str = "EN"
     serial_status = False
     pacing_mode = ""
@@ -294,13 +294,13 @@ class mainpage:
             case "VVI":
                 paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, RateSmooth]
             case "VOOR":
-                paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, ActivThold, ReactTime, RespFactor, RecovTime]
+                paras = [LowRateLim, UppRateLim, MaxSensRt, VAmplitude, VPulseWidth, ActivThold, ReactTime, RespFactor, RecovTime]
             case "AOOR":
-                paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth, ActivThold, ReactTime, RespFactor, RecovTime]
+                paras = [LowRateLim, UppRateLim, MaxSensRt, AAmplitude, APulseWidth, ActivThold, ReactTime, RespFactor, RecovTime]
             case "AAIR":
-                paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
+                paras = [LowRateLim, UppRateLim, MaxSensRt, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
             case "VVIR":
-                paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
+                paras = [LowRateLim, UppRateLim, MaxSensRt, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
         
         i = 1
         for index, para in enumerate(paras):
