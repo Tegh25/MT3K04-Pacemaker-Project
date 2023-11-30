@@ -31,6 +31,7 @@ class mainpage:
     t: LoadSerialEgram_debug
     quit_code = 0
     mode = "MAIN"
+    serial_port = ""
 
     def init_self_pref(self):
         try:
@@ -187,6 +188,8 @@ class mainpage:
             widget.destroy()
 
         if stat == "Main":
+            def serial_sel_onsel(event):
+                self.serial_port = event.widget.get()
             self.mode = "MAIN"
             acco_logout_btn = Button(toolbar, text=self.lang["Logout"], bootstyle="danger",
                                  command=lambda : self.quit(self, mode="LOGOUT"))
@@ -197,9 +200,15 @@ class mainpage:
             serial_sel_labl.pack(side=LEFT, padx=10)
             serial_selector = Combobox(serial_sel_fram, values=serial_ports())
             serial_selector.pack(side=LEFT, padx=10)
+            serial_selector.bind('<<ComboboxSelected>>', serial_sel_onsel)
             serial_stat_lbl = Label(serial_sel_fram,
                                     text=self.lang["SerialConn"] if self.serial_status else self.lang["SerlDiscon"])
             serial_stat_lbl.pack(side=LEFT, padx=10)
+            serial_push_btn = Button(serial_sel_fram,
+                                     text=self.lang["PushPara"],
+                                     command=lambda : sendSerial.sendSerial(self.serial_port,
+                                                                            [self.pacing_mode, *self.get_curr_paras(self)]))
+            serial_push_btn.pack(side=LEFT, padx=10)
             sftw_stings_btn = Button(toolbar, text=self.lang["Settings"], bootstyle="secondary",
                                  command=lambda : self.setting_frame(self))
             sftw_stings_btn.pack(side=RIGHT, padx=0)

@@ -71,7 +71,8 @@ EN = ADict({
     "_Med-High" : "Mid High",
     "_High"     : "High",
     "_V-High"   : "Very High",
-    "ChangePwd" : "Change Password"
+    "ChangePwd" : "Change Password",
+    "PushPara"  : "Sync to Pacemaker"
 })
 
 CN = ADict({
@@ -130,7 +131,8 @@ CN = ADict({
     "_Med-High" : "中高",
     "_High"     : "高",
     "_V-High"   : "極高",
-    "ChangePwd" : "變更密碼"
+    "ChangePwd" : "變更密碼",
+    "PushPara"  : "同步至調節器"
 })
 
 FR = {
