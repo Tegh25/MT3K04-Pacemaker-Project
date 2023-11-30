@@ -137,7 +137,7 @@ class LoadSerialEgram(threading.Thread):
         port = self.serial_name
         i = 0
         try:
-            uC = serial.Serial(port, baudrate=115200)
+            uC = serial.Serial(port, baudrate=9600)
         except:
             self.stop()
             return

@@ -101,7 +101,7 @@ def sendSerial(port, paras_data_list):
     unpacked = st.unpack(serial_com)
     print(unpacked)
     try:
-        uC = serial.Serial(port, baudrate=115200)
+        uC = serial.Serial(port, baudrate=9600)
         uC.write(serial_com)
         uC.close()
     except:
@@ -112,6 +112,7 @@ if __name__ == "__main__":
     # LowRateLim, UppRateLim, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime
     paras = ['VOOR', '60', '120', '120', '3.5', '0.4', '_Med', '30', '8', '5']
     serial_com = sendSerial("", paras)
+    print(len(serial_com))
     st = struct.Struct('<BBBBddddddBBBBBBBBB')
     unpacked = st.unpack(serial_com)
     print(unpacked)
