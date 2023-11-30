@@ -45,7 +45,7 @@ def center(win):
 import serial.tools.list_ports
 import sendSerial
 def serial_ports():
-    return serial.tools.list_ports.comports()
+    return [i.serial_number for i in serial.tools.list_ports.comports()]
 
 import tkinter as tk
 import tkinter.ttk as ttk
