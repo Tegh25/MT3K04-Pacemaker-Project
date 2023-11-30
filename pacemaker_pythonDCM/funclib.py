@@ -155,6 +155,7 @@ class LoadSerialEgram(threading.Thread):
             if len(self.egram_data_y2) >= 500:
                 self.egram_data_y2.pop(0)
             i += 1
+            serial_data = uC.read()
 
     def __init__(self, serial=None, *args, **kwargs):
         self.serial_name = serial
