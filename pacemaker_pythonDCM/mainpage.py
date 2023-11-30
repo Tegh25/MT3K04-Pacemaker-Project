@@ -206,7 +206,7 @@ class mainpage:
             serial_stat_lbl.pack(side=LEFT, padx=10)
             serial_push_btn = Button(serial_sel_fram,
                                      text=self.lang["PushPara"],
-                                     command=lambda : sendSerial.sendSerial(self.serial_port,
+                                     command=lambda : sendSerial.sendSerial(self.serial_port.split()[0],
                                                                             [self.pacing_mode, *self.get_curr_paras(self)]))
             serial_push_btn.pack(side=LEFT, padx=10)
             sftw_stings_btn = Button(toolbar, text=self.lang["Settings"], bootstyle="secondary",
