@@ -31,7 +31,7 @@ class mainpage:
     t: LoadSerialEgram_debug
     quit_code = 0
     mode = "MAIN"
-    serial_port = ""
+    serial_port = " "
 
     def init_self_pref(self):
         try:

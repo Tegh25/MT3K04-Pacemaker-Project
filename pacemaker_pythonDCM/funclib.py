@@ -136,26 +136,31 @@ class LoadSerialEgram(threading.Thread):
     def run(self):
         port = self.serial_name
         i = 0
-        uC = serial.Serial(port, baudrate=115200)
+        try:
+            uC = serial.Serial(port, baudrate=115200)
+        except:
+            self.stop()
+            return
         st = struct.Struct('<dd')
         serial_data = uC.read()
-        while serial_data:
+        while True:
             if self.stopped():
                 print("Egram stopped")
                 uC.close()
                 return
-            a_data, v_data = st.unpack(serial_data) 
-            self.egram_data_x.append(i)
-            self.egram_data_y1.append(a_data)
-            self.egram_data_y2.append(v_data)
-            if len(self.egram_data_x) >= 500:
-                self.egram_data_x.pop(0)
-            if len(self.egram_data_y1) >= 500:
-                self.egram_data_y1.pop(0)
-            if len(self.egram_data_y2) >= 500:
-                self.egram_data_y2.pop(0)
-            i += 1
-            serial_data = uC.read()
+            if serial_data:
+                a_data, v_data = st.unpack(serial_data) 
+                self.egram_data_x.append(i)
+                self.egram_data_y1.append(a_data)
+                self.egram_data_y2.append(v_data)
+                if len(self.egram_data_x) >= 500:
+                    self.egram_data_x.pop(0)
+                if len(self.egram_data_y1) >= 500:
+                    self.egram_data_y1.pop(0)
+                if len(self.egram_data_y2) >= 500:
+                    self.egram_data_y2.pop(0)
+                i += 1
+                serial_data = uC.read()
 
     def __init__(self, serial=None, *args, **kwargs):
         self.serial_name = serial
@@ -163,7 +168,7 @@ class LoadSerialEgram(threading.Thread):
         self.egram_data_x = []
         self.egram_data_y1 = []
         self.egram_data_y2 = []
-        super(LoadSerialEgram_debug, self).__init__(*args, **kwargs)
+        super(LoadSerialEgram, self).__init__(*args, **kwargs)
         self._stop_event = threading.Event()
 
     def stop(self):
