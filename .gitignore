@@ -1,4 +1,4 @@
-# Autosave files
+pu# Autosave files
 *.asv
 *.m~
 *.autosave
@@ -31,3 +31,4 @@ codegen/
 
 # Cloud based storage dotfile
 .MATLABDriveTag
+node_modules
