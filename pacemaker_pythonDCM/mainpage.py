@@ -30,6 +30,7 @@ class mainpage:
     showing_egram = False
     t: LoadSerialEgram_debug
     quit_code = 0
+    mode = "MAIN"
 
     def init_self_pref(self):
         try:
@@ -133,6 +134,9 @@ class mainpage:
         if mode == "EXIT":
             self.quit_code = 0
             self.root.quit()
+        elif mode == "PWD":
+            self.quit_code = self.username
+            self.root.quit()
         else:
             self.quit_code = 1
             self.root.quit()
@@ -149,6 +153,7 @@ class mainpage:
         self.root.unbind("<Return>")
         self.userid = userid
         self.loginname = loginname
+        self.username = loginname
         self.init_self_pref(self)
         self.root.title(self.lang["RootTitle<"] + self.loginname + self.lang["RootTitle>"])
         
@@ -164,7 +169,7 @@ class mainpage:
         print(self.presets)
         self.root.mainloop()
         print("mainloop done")
-        if self.pacing_mode != "":
+        if self.pacing_mode != "" and self.mode == "MAIN":
             self.presets["_temp"] = [self.pacing_mode]
             self.presets["_temp"] += self.get_curr_paras(self)
         self.sync_self_pref(self)
@@ -181,10 +186,11 @@ class mainpage:
         for widget in toolbar.winfo_children():
             widget.destroy()
 
-        acco_logout_btn = Button(toolbar, text=self.lang["Logout"], bootstyle="danger",
-                                 command=lambda : self.quit(self, mode="LOGOUT"))
-        acco_logout_btn.pack(side=RIGHT, padx=20)
         if stat == "Main":
+            self.mode = "MAIN"
+            acco_logout_btn = Button(toolbar, text=self.lang["Logout"], bootstyle="danger",
+                                 command=lambda : self.quit(self, mode="LOGOUT"))
+            acco_logout_btn.pack(side=RIGHT, padx=20)
             serial_sel_fram = Frame(toolbar)
             serial_sel_fram.pack(side=LEFT, padx=10)
             serial_sel_labl = Label(serial_sel_fram, text=self.lang["SelPort"])
@@ -201,6 +207,10 @@ class mainpage:
                                          command=lambda : self.show_egram(self))
             self.show_egram_btn.pack(side=RIGHT, padx=20)
         if stat == "Settings":
+            self.mode = "SET"
+            changepwd_btn = Button(toolbar, text=self.lang["ChangePwd"], bootstyle="warning",
+                                 command=lambda : self.quit(self, mode="PWD"))
+            changepwd_btn.pack(side=RIGHT, padx=20)
             setting_label = Label(toolbar, text=self.lang["Settings"], font="Helvetica 20")
             setting_label.pack(side=LEFT, padx=20)
             sftw_stings_btn = Button(toolbar, text=self.lang["Back"], bootstyle="success",
@@ -325,7 +335,7 @@ class mainpage:
             return
         preset_name = self.AskString(self,
                                 self.lang["NewPreset"], self.lang["AskPrsetNm"],
-                                self.lang["Yes"], self.lang["No"]).get()
+                                self.lang["Save"], self.lang["Cancel"]).get()
         if preset_name in self.presets:
             messagebox.showwarning(self.lang["PsetExist"], self.lang["PsExstMsg"])
             return
@@ -460,7 +470,7 @@ class mainpage:
         self.setting_frame(self, from_language="True")
 
 def main():
-    root, logged, userid, loginname = login.login(relogin=False, debug=True)
+    root, logged, userid, loginname = login.login(relogin=False, debug=False)
     while 1:
         print(logged)
         if not logged or userid == -1:
@@ -468,7 +478,7 @@ def main():
         quit_code = mainpage(userid, loginname, root=root)
         if quit_code == 0:
             return
-        root, logged, userid, loginname = login.login(relogin=True, debug=True)
+        root, logged, userid, loginname = login.login(relogin=True, debug=False, quit_code=quit_code)
 
 if __name__ == "__main__":
     main()

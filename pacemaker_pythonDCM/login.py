@@ -22,7 +22,7 @@ class login:
     userid = -1
     login_success = False
     loginname = ""
-    def __new__(self, relogin=False, debug=False):
+    def __new__(self, relogin=False, debug=False, quit_code=1):
         if not relogin:
             self.style = Style()
             self.style = Style(theme="pulse")
@@ -48,7 +48,10 @@ class login:
         self.interact_frame.grid_columnconfigure(0, weight=1)
         self.interact_frame.grid_rowconfigure(9999, weight=1)
         self.interact_frame.grid_columnconfigure(9999, weight=1)
-        self.login(self)
+        if quit_code == 1:
+            self.login(self)
+        if isinstance(quit_code, str):
+            self.change_password(self, quit_code)
         if not debug:
             self.root.mainloop()
             return self.root, self.login_success, self.userid, self.loginname
@@ -106,6 +109,36 @@ class login:
         register_text.bind("<Button-1>", lambda _: self.login(self, username_entry.get()))
         self.root.bind("<Return>", lambda _ : self.create_user(self, username_entry, password_entry, re_password_entry))
 
+    def change_password(self, username):
+        window = self.interact_frame
+        for widget in window.winfo_children():
+            widget.destroy()
+        self.root.title("Change Password for " + username)
+        title = tk.Label(window, text="Change Password", font="Helvetica 36", pady=0)
+        title.grid(row=0, column=1, columnspan=2, sticky="n")
+        title_ = tk.Label(window, text="Username: " + username, font="Helvetica 16", pady=10)
+        title_.grid(row=1, column=1, columnspan=2, sticky="n")
+        oldpass_label = Label(window, text="Current Password : ")
+        oldpass_label.grid(row=2, column=1, padx=10, pady=10, sticky="e")
+        oldpass_entry = Entry(window, show='*')
+        oldpass_entry.grid(row=2, column=2, padx=10, pady=10, sticky="w")
+        oldpass_entry.focus_set()
+        password_label = Label(window, text="New Password : ")
+        password_label.grid(row=3, column=1, padx=10, pady=10, sticky="e")
+        password_entry = Entry(window, show='*')
+        password_entry.grid(row=3, column=2, padx=10, pady=10, sticky="w")
+        re_password_label = Label(window, text="Repeat Password : ")
+        re_password_label.grid(row=4, column=1, padx=10, pady=10, sticky="e")
+        re_password_entry = Entry(window, show='*')
+        re_password_entry.grid(row=4, column=2, padx=10, pady=10, sticky="w")
+        ctrl_btn_frame = Frame(window)
+        ctrl_btn_frame.grid(row=5, column=1, columnspan=2, padx=10, pady=10)
+        save_button = Button(ctrl_btn_frame, text="Save", command=lambda : self.validate_newpass(self, username, oldpass_entry, password_entry, re_password_entry))
+        save_button.pack(side="left", padx=10)
+        cancel_button = Button(ctrl_btn_frame, text="Cancel", command=lambda : self.validate_newpass(self, username, oldpass_entry, password_entry, re_password_entry, cancel=True))
+        cancel_button.pack(side="right", padx=10)
+        self.root.bind("<Return>", lambda _ : self.validate_newpass(self, username, oldpass_entry, password_entry, re_password_entry))
+
     def login(self, username=""):
         window = self.interact_frame
         for widget in window.winfo_children():
@@ -132,6 +165,40 @@ class login:
         register_text.config(foreground="#55e")
         register_text.bind("<Button-1>", lambda _: self.register(self, username_entry.get()))
         self.root.bind("<Return>", lambda _ : self.validate_login(self, username_entry, password_entry))
+
+    def validate_newpass(self, username, old_e, passwd_e, re_passwd_e, cancel=False):
+        if cancel:
+            self.login_success = True
+            self.userid = hash(username)
+            self.loginname = username
+            self.root.quit()
+            return
+        try:
+            try:
+                with open('usercred.pkl', 'rb') as obj:
+                    hashs = pickle.load(obj)
+            except FileNotFoundError:
+                raise NoDatabaseError
+            except UnpicklingError:
+                raise NoDatabaseError
+            old_passwd = old_e.get()
+            passwd = passwd_e.get()
+            re_passwd = re_passwd_e.get()
+            if hash(old_passwd) != hashs[username]:
+                raise PasswordError
+            if len(passwd) <= 3:
+                raise InputNotValidError
+            if re_passwd != passwd:
+                raise PasswdMatchError
+            pwdhash = hash(passwd)
+            hashs[username] = pwdhash
+            with open('usercred.pkl', "wb") as obj:
+                pickle.dump(hashs, obj, pickle.HIGHEST_PROTOCOL)
+            goto_login = messagebox.showinfo("Password Changed!", "Password changed, please re-login.")
+            if goto_login:
+                self.login(self, username)
+        except (PasswdMatchError, PasswordError, NoDatabaseError, InputNotValidError) as err:
+            self.error_handeler(self, err, username)
 
     def create_user(self, user_e, passwd_e, re_passwd_e):
         username = user_e.get()
@@ -193,5 +260,5 @@ class login:
             self.error_handeler(self, err, username)
 
 if __name__ == "__main__":
-    a = login()
+    a = login(quit_code="forbesii")
     print(a)

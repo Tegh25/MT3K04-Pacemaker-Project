@@ -30,8 +30,8 @@ EN = ADict({
     "PacePara"  : "Pacemaker Parameters",
     "SelPaceMod": "Pacing mode",
     "Back"      : "Back",
-    "Yes"       : "Yes",
-    "No"        : "Cancel",
+    "Save"      : "Save",
+    "Cancel"    : "Cancel",
     "LdCnfrmTtl": "Confirm Load",
     "LdCnfrmTxt": "Loading the preset would override the current settings. Continue?",
     "DelCfrmTtl": "Confirm delete",
@@ -70,7 +70,8 @@ EN = ADict({
     "_Med"      : "Mid",
     "_Med-High" : "Mid High",
     "_High"     : "High",
-    "_V-High"   : "Very High"
+    "_V-High"   : "Very High",
+    "ChangePwd" : "Change Password"
 })
 
 CN = ADict({
@@ -88,8 +89,8 @@ CN = ADict({
     "PacePara"  : "心律調節器變數",
     "SelPaceMod": "調節器模式",
     "Back"      : "返回",
-    "Yes"       : "確定",
-    "No"        : "取消",
+    "Save"      : "存儲",
+    "Cancel"    : "取消",
     "LdCnfrmTtl": "確認加載",
     "LdCnfrmTxt": "加載預設將會覆蓋當前設定，繼續？",
     "DelCfrmTtl": "確認刪除",
@@ -128,7 +129,8 @@ CN = ADict({
     "_Med"      : "中",
     "_Med-High" : "中高",
     "_High"     : "高",
-    "_V-High"   : "極高"
+    "_V-High"   : "極高",
+    "ChangePwd" : "變更密碼"
 })
 
 FR = {
