@@ -25,7 +25,7 @@ def convert(para, data):
 def sendSerial(port, paras_data_list):
     # Function_Call = 0 BY DEFAULT
 
-    st = struct.Struct('<IIIIddddddIIIIIIIII')
+    st = struct.Struct('<bbbbddddddbbbbbbbbb')
 
     mode = paras_data_list[0]
 
@@ -109,6 +109,6 @@ if __name__ == "__main__":
     # LowRateLim, UppRateLim, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime
     paras = ['VOOR', '60', '120', '120', '3.5', '0.4', '_Med', '30', '8', '5']
     serial_com = sendSerial("", paras)
-    st = struct.Struct('<IIIIddddddIIIIIIIII')
+    st = struct.Struct('<bbbbddddddbbbbbbbbb')
     unpacked = st.unpack(serial_com)
     print(unpacked)
