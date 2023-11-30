@@ -98,11 +98,11 @@ def sendSerial(port, paras_data_list):
 
     print(serial_com)
     print(len(serial_com))
-    # uC = serial.Serial(port, baudrate=115200)
-    # uC.write(serial_com)
+    uC = serial.Serial(port, baudrate=115200)
+    uC.write(serial_com)
     # unpacked = st.unpack(serial_com)
     # print(unpacked)
-    # uC.close()
+    uC.close()
     return serial_com
 
 if __name__ == "__main__":
