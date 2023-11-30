@@ -281,17 +281,17 @@ class mainpage:
             case "AOO":
                 paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth]
             case "AAI":
-                paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, Hysteresis, RateSmooth]
+                paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, RateSmooth]
             case "VVI":
-                paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, Hysteresis, RateSmooth]
+                paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, RateSmooth]
             case "VOOR":
                 paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, ActivThold, ReactTime, RespFactor, RecovTime]
             case "AOOR":
                 paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth, ActivThold, ReactTime, RespFactor, RecovTime]
             case "AAIR":
-                paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, Hysteresis, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
+                paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
             case "VVIR":
-                paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, Hysteresis, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
+                paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
         
         i = 1
         for index, para in enumerate(paras):
