@@ -21,7 +21,7 @@ else:
 
 class mainpage:
     lang = langpack.CN
-    lang_var_str = "ZH_HK"
+    lang_var_str = "EN"
     serial_status = False
     pacing_mode = ""
     rootw = int(800*zoomfactor)
@@ -48,8 +48,8 @@ class mainpage:
             with open('userpref.pkl', 'wb') as obj:
                 userpref = {self.userid: {
                     "loginname": self.loginname,
-                    "lang_var_str": "ZH_HK",
-                    "lang": "langpack.CN",
+                    "lang_var_str": "EN",
+                    "lang": "langpack.EN",
                     "presets": {}
                 }}
                 pickle.dump(userpref, obj, pickle.HIGHEST_PROTOCOL)
@@ -58,8 +58,8 @@ class mainpage:
                 userpref = pickle.load(obj)
             userpref[self.userid] = {
                     "loginname": self.loginname,
-                    "lang_var_str": "ZH_HK",
-                    "lang": "langpack.CN",
+                    "lang_var_str": "EN",
+                    "lang": "langpack.EN",
                     "presets": {}
                 }
             with open('userpref.pkl', 'wb') as obj:
