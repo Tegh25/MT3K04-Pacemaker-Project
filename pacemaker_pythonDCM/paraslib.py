@@ -35,6 +35,10 @@ UppRateLim =   PacePara("UppRtLim",
                         [(50,175)],
                         [5],
                         120)
+MaxSensRt =     PacePara("MaxSensRt",
+                        [(50,175)],
+                        [5],
+                        120)
 VAmplitude =    PacePara("VAmp",
                         [(0,0), (0.5,3.2), (3.5,7)],
                         [0.5, 0.1, 0.5],

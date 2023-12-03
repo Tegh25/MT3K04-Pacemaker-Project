@@ -48,6 +48,7 @@ EN = ADict({
     "Atr"       : "Atrium",
     "LowRtLim"  : "Lower Rate Limit (ppm)",
     "UppRtLim"  : "Upper Rate Limit (ppm)",
+    "MaxSensRt" : "Max Sense Rate (ppm)",
     "VAmp"      : "Ventricular Amplitude (V)",
     "AAmp"      : "Atrium Amplitude (V)",
     "APulseWid" : "Atrium Pulse Width (ms)",
@@ -71,7 +72,8 @@ EN = ADict({
     "_Med-High" : "Mid High",
     "_High"     : "High",
     "_V-High"   : "Very High",
-    "ChangePwd" : "Change Password"
+    "ChangePwd" : "Change Password",
+    "PushPara"  : "Sync to Pacemaker"
 })
 
 CN = ADict({
@@ -107,6 +109,7 @@ CN = ADict({
     "Atr"       : "心房",
     "LowRtLim"  : "最低心律（次每分鐘）",
     "UppRtLim"  : "最高心律（次每分鐘）",
+    "MaxSensRt" : "Max Sense Rate (ppm)",
     "VAmp"      : "心室振幅（伏）",
     "AAmp"      : "心房振幅（伏）",
     "APulseWid" : "心房脈衝寬度（毫秒）",
@@ -130,7 +133,8 @@ CN = ADict({
     "_Med-High" : "中高",
     "_High"     : "高",
     "_V-High"   : "極高",
-    "ChangePwd" : "變更密碼"
+    "ChangePwd" : "變更密碼",
+    "PushPara"  : "同步至調節器"
 })
 
 FR = {

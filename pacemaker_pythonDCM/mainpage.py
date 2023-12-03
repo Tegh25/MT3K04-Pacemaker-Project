@@ -20,7 +20,7 @@ else:
     zoomfactor = 1
 
 class mainpage:
-    lang = langpack.CN
+    lang = langpack.EN
     lang_var_str = "EN"
     serial_status = False
     pacing_mode = ""
@@ -31,6 +31,7 @@ class mainpage:
     t: LoadSerialEgram_debug
     quit_code = 0
     mode = "MAIN"
+    serial_port = " "
 
     def init_self_pref(self):
         try:
@@ -187,6 +188,8 @@ class mainpage:
             widget.destroy()
 
         if stat == "Main":
+            def serial_sel_onsel(event):
+                self.serial_port = event.widget.get()
             self.mode = "MAIN"
             acco_logout_btn = Button(toolbar, text=self.lang["Logout"], bootstyle="danger",
                                  command=lambda : self.quit(self, mode="LOGOUT"))
@@ -197,9 +200,15 @@ class mainpage:
             serial_sel_labl.pack(side=LEFT, padx=10)
             serial_selector = Combobox(serial_sel_fram, values=serial_ports())
             serial_selector.pack(side=LEFT, padx=10)
+            serial_selector.bind('<<ComboboxSelected>>', serial_sel_onsel)
             serial_stat_lbl = Label(serial_sel_fram,
                                     text=self.lang["SerialConn"] if self.serial_status else self.lang["SerlDiscon"])
             serial_stat_lbl.pack(side=LEFT, padx=10)
+            serial_push_btn = Button(serial_sel_fram,
+                                     text=self.lang["PushPara"],
+                                     command=lambda : sendSerial.sendSerial(self.serial_port.split()[0],
+                                                                            [self.pacing_mode, *self.get_curr_paras(self)]))
+            serial_push_btn.pack(side=LEFT, padx=10)
             sftw_stings_btn = Button(toolbar, text=self.lang["Settings"], bootstyle="secondary",
                                  command=lambda : self.setting_frame(self))
             sftw_stings_btn.pack(side=RIGHT, padx=0)
@@ -281,17 +290,17 @@ class mainpage:
             case "AOO":
                 paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth]
             case "AAI":
-                paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, Hysteresis, RateSmooth]
+                paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, RateSmooth]
             case "VVI":
-                paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, Hysteresis, RateSmooth]
+                paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, RateSmooth]
             case "VOOR":
-                paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, ActivThold, ReactTime, RespFactor, RecovTime]
+                paras = [LowRateLim, UppRateLim, MaxSensRt, VAmplitude, VPulseWidth, ActivThold, ReactTime, RespFactor, RecovTime]
             case "AOOR":
-                paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth, ActivThold, ReactTime, RespFactor, RecovTime]
+                paras = [LowRateLim, UppRateLim, MaxSensRt, AAmplitude, APulseWidth, ActivThold, ReactTime, RespFactor, RecovTime]
             case "AAIR":
-                paras = [LowRateLim, UppRateLim, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, Hysteresis, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
+                paras = [LowRateLim, UppRateLim, MaxSensRt, AAmplitude, APulseWidth, ASensitivity, ARefractPrid, PVARP, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
             case "VVIR":
-                paras = [LowRateLim, UppRateLim, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, Hysteresis, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
+                paras = [LowRateLim, UppRateLim, MaxSensRt, VAmplitude, VPulseWidth, VSensitivity, VRefractPrid, RateSmooth, ActivThold, ReactTime, RespFactor, RecovTime]
         
         i = 1
         for index, para in enumerate(paras):
@@ -396,7 +405,8 @@ class mainpage:
         if self.showing_egram is False:
             self.egram_frame.pack(side=BOTTOM, fill="both", expand=True, padx=5)
             Separator(self.egram_frame).pack(fill=X, padx=20, pady=20)
-            self.t = LoadSerialEgram_debug()
+            # self.t = LoadSerialEgram_debug()
+            self.t = LoadSerialEgram(serial=self.serial_port.split()[0])
             self.t.start()
             self.draw_egram = DrawEgram(master=self.egram_frame, t=self.t, lang=self.lang)
             self.show_egram_btn.configure(text=self.lang["HideEgram"])
