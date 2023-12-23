@@ -1,16 +1,75 @@
 # MT3K04-Pacemaker-Project
-Running the DCM on your Local Device: This document assumes you have on your device VSCode along with NodeJS, HTML, CSS, and JavaScript If you do not contain any of the following please 
-follow any process online to ensure all are donwloaded on your device.
 
-Step 1: Download electron on your local device. Electron is a framework which was used in the design of the DCM on this device. It allows us to use React and other web Develpment software to create
-a desktop application which is cross platform freindly. This is mainly due to the reason that we need to create desktop application and not a web application. To download electron you could run 
-"npm install electron --save-dev" on your terminal or follow the guide on "https://www.electronjs.org/docs/latest/tutorial/installation". The link goes through a more extensive download of electron all of 
-which might not be needed to run this application but should ensure that the application will run. 
+This repository preserves and displays all our coursework from our third-year Software Development course, in which we developed a fully functional Pacemaker using Simulink and Python.
 
-Step 2: Download craco which stands for "Create React App Configuration Override". To download this follow the instructions on "https://www.npmjs.com/package/@craco/craco".
+Eight pacing control modes (AOO, VOO, AAI, VVI, AOOR, VOOR, AAIR, VVIR) were developed using Simulink and tested using hardware that simulated a pacemaker and heart.
 
-Step 3: Once all the above are downloaded peform a git pull command from this repositery to get all files on your local computer. 
+The pacemaker is controlled by the device control module (DCM), which is a graphical user interface that selects the mode and user parameters using the UART serial communication protocol to communicate with the pacemaker. The DCM was created in Python, with another version of the DCM created using React with limited functionality.
 
-Step 4: Make your way to the "my-electron-react-application" folder and perfrom the "npm run build" command followed by the "npm run start" command. This should open a desktop window on your device displaying the DCM. 
+The design process, decisions, safety assurance cases, and testing are all included in the documentation file included in this repository.
 
-NOTE: If any issues are encountered during this process YOU SHOULD UTILIZE online resources to solve them. Issues such as not being able to download all the corresponding software needed to run the DCM.
+<img src="https://github.com/Tegh25/MT3K04-Pacemaker-Project/assets/48258080/2227dc68-365d-4cdd-90ee-328be8e22126" width="700" height="550" />
+
+---
+
+## Python Device Control Module
+
+Python 3.11 is required to run the Python DCM locally.
+
+### Required Packages
+
+- Serialtools
+- Ttkbootstrap
+- Matplotlib
+
+```
+pip install serialtools
+pip install ttkbootstrap
+pip install matplotlib
+```
+
+The following packages are also used in this project, they may not be required to be downloaded using pip.
+- Tkinter
+- Pickle
+- VerticalScrolledFrame https://gist.github.com/novel-yet-trivial/3eddfce704db3082e38c84664fc1fdf8
+- Hashlib
+- Threading
+- Struct
+- NumPy
+- Dataclasses
+
+To run the DCM locally, open the `pacemaker_pythonDCM` folder in a VSCode window and simply run the `mainpage.py` file.
+
+
+## React Device Control Module
+
+Node.js v16.19 is required to run the React DCM locally.
+
+### Electron.js Download
+
+[Electron official installation guide.](https://www.electronjs.org/docs/latest/tutorial/installation)
+
+This application uses the Electron.js framework, the package can be downloaded simply by using the following command:
+
+`npm install electron --save-dev`
+
+### Craco Download
+
+[Create React App Configuration Override official installation guide.](https://www.npmjs.com/package/@craco/craco)
+
+Navigate to the `front-end-assets/ElectronApp/my_electron_react_application` directory and perform the following commands to run the React DCM locally.
+
+```
+npm run start
+npm run build
+```
+
+All Simulink models were created using MATLAB/Simulink R2023b and are located in the `Simulink` folder. The `allModesSerial.slx` file implements all pacing control modes and is the final version of the project.
+
+The hardware kit provided by McMaster University is required for building and flashing the model. Please note that the following packages are required to open the Simulink models.
+
+![image](https://github.com/Tegh25/MT3K04-Pacemaker-Project/assets/48258080/31651267-ae96-49bc-8d24-ba2db9dcd240)
+
+The final version of the Simulink model:
+![image](https://github.com/Tegh25/MT3K04-Pacemaker-Project/assets/48258080/a74c8ee0-068d-43d8-ae87-003574730920)
+
