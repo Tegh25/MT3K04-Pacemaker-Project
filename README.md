@@ -64,6 +64,8 @@ npm run start
 npm run build
 ```
 
+## Simulink
+
 All Simulink models were created using MATLAB/Simulink R2023b and are located in the `Simulink` folder. The `allModesSerial.slx` file implements all pacing control modes and is the final version of the project.
 
 The hardware kit provided by McMaster University is required for building and flashing the model. Please note that the following packages are required to open the Simulink models.
